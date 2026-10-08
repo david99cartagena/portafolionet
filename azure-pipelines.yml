@@ -23,11 +23,11 @@ steps:
     packageType: 'sdk'
     version: '10.0.x'
 
-- task: NuGetToolInstaller@1
-
-- task: NuGetCommand@2
+- task: DotNetCoreCLI@2
+  displayName: 'Restaurando dependencias...'
   inputs:
-    restoreSolution: '$(solution)'
+    command: 'restore'
+    projects: '$(proyecto)'
 
 - task: DotNetCoreCLI@2
   displayName: 'Construyendo los artefactos...'
