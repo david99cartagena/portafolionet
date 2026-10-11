@@ -52,4 +52,4 @@ steps:
     azureSubscription: 'Suscripción de Azure 1(85f66051-7286-49fa-ab45-28524ee4f088)'
     appType: 'webApp'
     WebAppName: 'PortafolioDavidCartagenaa'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
