@@ -36,8 +36,20 @@ steps:
     publishWebProjects: false
     projects: '$(proyecto)'
     arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory) --runtime win-x86 --self-contained'
-    zipAfterPublish: false
+    zipAfterPublish: true
     modifyOutputPath: false
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publicando los artefactos'
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: 'drop'
+
+- task: AzureRmWebAppDeployment@5
+  displayName: 'Desplegar en Azure App Service'
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Suscripción de Azure 1(85f66051-7286-49fa-ab45-28524ee4f088)'
+    appType: 'webApp'
+    WebAppName: 'PortafolioDavidCartagenaa'
+    package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
